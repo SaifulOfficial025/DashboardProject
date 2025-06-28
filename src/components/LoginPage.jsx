@@ -1,7 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import { useHistory } from 'react-router-dom';
-import { AuthProvider } from '../context/AuthContext';
 import { Link, useLocation } from "react-router-dom";
 import backgroundImage from '../assets/LoginPage.svg';
 
@@ -18,14 +17,13 @@ export default function LoginPage() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
-  const handleLogin = async (e) => {
+const handleLogin = async (e) => {
     e.preventDefault();
     setError('');
 
     const result = await login(email, password);
     if (result.success) {
-        history.push(from);
-        // or any protected route
+        history.push('/dashboard');
     } else {
       setError(result.message);
     }
@@ -117,6 +115,3 @@ export default function LoginPage() {
     </div>
   );
 }
-
-
-

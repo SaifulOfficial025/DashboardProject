@@ -1,7 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import { useHistory } from 'react-router-dom';
-import { AuthProvider } from '../context/AuthContext';
 import { Link, useLocation } from "react-router-dom";
 import backgroundImage from '../assets/LoginPage.svg';
 
@@ -134,7 +133,7 @@ export default function Signup() {
           {/* Don't have an account? Sign up */}
           <p className="text-center text-gray-400 text-sm mt-8">
             Don't have an account?{' '}
-            <Link to="/login" className="text-[#422AFB] hover:underline font-bold">Sign In</Link>
+            <Link to="/" className="text-[#422AFB] hover:underline font-bold">Sign In</Link>
 
           </p>
         </div>
@@ -142,6 +141,3 @@ export default function Signup() {
     </div>
   );
 }
-
-
-

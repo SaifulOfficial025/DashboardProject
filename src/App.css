@@ -1,1 +1,33 @@
 @import "tailwindcss";
+
+html,
+body {
+  overflow: hidden;
+}
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+}
+
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+.background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+}
+
+.main-content {
+  overflow-y: auto;
+  height: 100vh;
+  padding-top: 60px; /* Adjust based on navbar height */
+}

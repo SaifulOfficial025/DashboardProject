@@ -54,75 +54,135 @@ const DashboardMain = () => {
 
   const projects = [
     {
-      name: "Chakra Soft UI Version",
-      users: 4,
+      id: 1,
+      company: "Chakra Soft UI Version",
+      icon: "🎯",
+      iconBg: "bg-red-500",
+      members: [
+        "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=24&h=24&fit=crop&crop=face",
+        "https://images.unsplash.com/photo-1494790108755-2616b612b29c?w=24&h=24&fit=crop&crop=face",
+        "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=24&h=24&fit=crop&crop=face",
+        "https://images.unsplash.com/photo-1527980965255-d3b416303d12?w=24&h=24&fit=crop&crop=face",
+        "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=24&h=24&fit=crop&crop=face",
+      ],
       budget: "$14,000",
-      completion: 60
+      completion: 60,
     },
     {
-      name: "Add Progress Track",
-      users: 3,
+      id: 2,
+      company: "Add Progress Track",
+      icon: "📊",
+      iconBg: "bg-blue-500",
+      members: [
+        "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=24&h=24&fit=crop&crop=face",
+        "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=24&h=24&fit=crop&crop=face"
+      ],
       budget: "$3,000",
-      completion: 10
+      completion: 10,
     },
     {
-      name: "Fix Platform Errors",
-      users: 2,
+      id: 3,
+      company: "Fix Platform Errors",
+      icon: "🔧",
+      iconBg: "bg-gray-600",
+      members: [
+        "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=24&h=24&fit=crop&crop=face",
+        "https://images.unsplash.com/photo-1544725176-7c40e5a71c5e?w=24&h=24&fit=crop&crop=face"
+      ],
       budget: "Not set",
-      completion: 100
+      completion: 100,
     },
     {
-      name: "Launch our Mobile App",
-      users: 5,
+      id: 4,
+      company: "Launch our Mobile App",
+      icon: "🚀",
+      iconBg: "bg-green-500",
+      members: [
+        "https://images.unsplash.com/photo-1557804506-669a67965ba0?w=24&h=24&fit=crop&crop=face",
+        "https://images.unsplash.com/photo-1551836022-deb4988cc6c0?w=24&h=24&fit=crop&crop=face",
+        "https://images.unsplash.com/photo-1463453091185-61582044d556?w=24&h=24&fit=crop&crop=face",
+        "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=24&h=24&fit=crop&crop=face",
+      ],
       budget: "$32,000",
-      completion: 100
+      completion: 100,
     },
     {
-      name: "Add the New Pricing Page",
-      users: 3,
+      id: 5,
+      company: "Add the New Pricing Page",
+      icon: "💎",
+      iconBg: "bg-blue-600",
+      members: [
+        "https://images.unsplash.com/photo-1599566150163-29194dcaad36?w=24&h=24&fit=crop&crop=face",
+        "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=24&h=24&fit=crop&crop=face",
+        "https://images.unsplash.com/photo-1488161628813-04466f872be2?w=24&h=24&fit=crop&crop=face",
+        "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=24&h=24&fit=crop&crop=face",
+        "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=24&h=24&fit=crop&crop=face",
+      ],
       budget: "$400",
-      completion: 25
-    }
+      completion: 25,
+    },
+    {
+      id: 6,
+      company: "Redesign New Online Shop",
+      icon: "🛍️",
+      iconBg: "bg-pink-500",
+      members: [
+        "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=24&h=24&fit=crop&crop=face",
+        "https://images.unsplash.com/photo-1582750433449-648ed127bb54?w=24&h=24&fit=crop&crop=face"
+      ],
+      budget: "$7,600",
+      completion: 40,
+    },
   ];
 
   const orders = [
     {
+      id: 1,
+      icon: "🔵",
+      iconBg: "bg-blue-500",
       title: "$2400, Design changes",
       time: "22 DEC 7:20 PM",
-      status: "done"
     },
     {
-      title: "New order #1832412",
-      time: "21 DEC 11 PM",
-      status: "done"
+      id: 2,
+      icon: "🔴",
+      iconBg: "bg-red-500",
+      title: "New order #4219423",
+      time: "21 DEC 11:21 PM",
     },
     {
-      title: "Server payments for April",
-      time: "21 DEC 9:34 PM",
-      status: "done"
+      id: 3,
+      icon: "💳",
+      iconBg: "bg-blue-400",
+      title: "Server Payments for April",
+      time: "21 DEC 9:28 PM",
     },
     {
-      title: "New card added for order #4395133",
-      time: "20 DEC 2:20 AM",
-      status: "done"
+      id: 4,
+      icon: "💳",
+      iconBg: "bg-orange-500",
+      title: "New card added for order #3210145",
+      time: "20 DEC 3:52 PM",
     },
     {
-      title: "Unlock packages for development",
-      time: "18 DEC 4:54 AM",
-      status: "error"
+      id: 5,
+      icon: "📦",
+      iconBg: "bg-gray-600",
+      title: "Unlock packages for Development",
+      time: "19 DEC 11:35 PM",
     },
     {
-      title: "New order #9583120",
-      time: "17 DEC 1:12 AM",
-      status: "done"
-    }
+      id: 6,
+      icon: "🎯",
+      iconBg: "bg-red-500",
+      title: "New order #9851258",
+      time: "18 DEC 4:41 PM",
+    },
   ];
 
+
   return (
-    <main className="flex-1 p-6 overflow-auto relative min-h-screen bg-gray-900">
-      {/* Background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-br from-blue-900/20 to-purple-900/20"></div>
-      
+    <main className="flex-1 p-6">
       <div className="relative z-10">
         {/* Stats Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
@@ -159,236 +219,302 @@ const DashboardMain = () => {
         </div>
 
         {/* Welcome Section and Stats */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
-          {/* Welcome Card */}
-          <div className="lg:col-span-2 rounded-2xl p-6 relative overflow-hidden min-h-[200px]">
-            {/* Background gradient as fallback */}
-            <div className="absolute inset-0 bg-gradient-to-br from-purple-600 to-blue-600"></div>
-            
-            {/* Dark overlay for better text readability */}
-            <div className="absolute inset-0 bg-black/30"></div>
-            
-            {/* Content */}
-            <div className="relative z-10 flex items-center justify-between h-full">
-              <div>
-                <p className="text-white/80 text-sm mb-1">Welcome back,</p>
-                <h2 className="text-white text-3xl font-bold mb-2">Mark Johnson</h2>
-                <p className="text-white/80 text-sm mb-1">Glad to see you again!</p>
-                <p className="text-white/80 text-sm mb-4">Ask me anything.</p>
-                
-                <button className="bg-white/20 backdrop-blur-sm text-white px-4 py-2 rounded-lg hover:bg-white/30 transition-colors text-sm flex items-center gap-2">
-                  Tap to record
-                  <span>→</span>
-                </button>
-              </div>
-            </div>
-          </div>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8 items-stretch">
+  {/* Left Segment - Welcome Card with Image */}
+  <div
+    className="lg:col-span-1 rounded-2xl overflow-hidden relative p-6 text-white flex flex-col justify-between h-full"
+    style={{
+      backgroundImage: "url('/src/assets/DashboardIntroBg.svg')",
+      backgroundSize: 'cover',
+      backgroundPosition: 'center'
+    }}
+  >
+    <div className="bg-black/30 absolute inset-0 z-0" />
+    <div className="relative z-10">
+      <p className="text-white/70 text-sm mb-1">Welcome back,</p>
+      <h2 className="text-white text-3xl font-bold mb-2">Mark Johnson</h2>
+      <p className="text-white/70 text-sm mb-1">Glad to see you again!</p>
+      <p className="text-white/70 text-sm mb-4">Ask me anything.</p>
+      <button className="mt-45 flex items-center gap-2 text-sm font-medium bg-white/10 hover:bg-white/20 text-white px-4 py-2 rounded-lg backdrop-blur-sm transition">
+      Tap to record <span>→</span>
+    </button>
+    </div>
+  </div>
 
-          {/* Side Stats */}
-          <div className="space-y-6">
-            {/* Referral Tracking */}
-            <div 
-              className="rounded-2xl p-6 text-white relative overflow-hidden"
-              style={{
-                background: 'linear-gradient(to right, #050f2c, #0d204a)'
-              }}
-            >
-              {/* Background decoration */}
-              <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent"></div>
-              
-              {/* Content */}
-              <div className="relative z-10">
-                <div className="flex items-center justify-between mb-4">
-                  <h3 className="text-white text-lg font-semibold">Referral Tracking</h3>
-                  <MoreHorizontal className="text-gray-400 w-5 h-5" />
-                </div>
-                
-                <div className="space-y-4">
-                  <div>
-                    <p className="text-blue-200 text-sm">Invited</p>
-                    <p className="text-white text-2xl font-bold">145 people</p>
-                  </div>
-                  
-                  <div>
-                    <p className="text-blue-200 text-sm">Bonus</p>
-                    <p className="text-white text-2xl font-bold">1,465</p>
-                  </div>
-                </div>
-              </div>
-            </div>
+  <div
+  className="rounded-2xl p-6 text-white relative flex flex-col justify-between"
+  style={{
+    background: 'linear-gradient(to bottom, #041131, #081d48)'
+  }}
+>
+  {/* Header */}
+  <div className="flex items-center justify-between mb-6">
+    <h3 className="text-white text-lg font-semibold">Referral Tracking</h3>
+    <button className="text-white/50 hover:text-white transition">
+      <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+        <circle cx="5" cy="12" r="2" />
+        <circle cx="12" cy="12" r="2" />
+        <circle cx="19" cy="12" r="2" />
+      </svg>
+    </button>
+  </div>
 
-            {/* Safety Score */}
-            <div 
-              className="rounded-2xl p-6 text-white relative overflow-hidden"
-              style={{
-                background: 'linear-gradient(to right, #050f2c, #0d204a)'
-              }}
-            >
-              {/* Background decoration */}
-              <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent"></div>
-              
-              {/* Content */}
-              <div className="relative z-10">
-                <div className="flex items-center justify-between mb-4">
-                  <h3 className="text-white text-lg font-semibold">Safety</h3>
-                  <MoreHorizontal className="text-gray-400 w-5 h-5" />
-                </div>
-                
-                <div className="flex items-center justify-center">
-                  <div className="relative w-24 h-24">
-                    {/* Background circle */}
-                    <svg className="w-full h-full transform -rotate-90" viewBox="0 0 100 100">
-                      <circle
-                        cx="50"
-                        cy="50"
-                        r="35"
-                        stroke="currentColor"
-                        strokeWidth="6"
-                        fill="transparent"
-                        className="text-gray-600"
-                      />
-                      <circle
-                        cx="50"
-                        cy="50"
-                        r="35"
-                        stroke="currentColor"
-                        strokeWidth="6"
-                        fill="transparent"
-                        strokeDasharray={`${2.199 * 93} ${2.199 * (100 - 93)}`}
-                        className="text-green-400"
-                        strokeLinecap="round"
-                      />
-                    </svg>
-                    <div className="absolute inset-0 flex flex-col items-center justify-center">
-                      <span className="text-white text-2xl font-bold">9.3</span>
-                      <span className="text-blue-200 text-xs">Total Score</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+  <div className="flex justify-between items-center gap-6">
+    {/* Left: Metrics */}
+    <div className="space-y-4 w-1/2">
+      <div className="bg-white/5 px-4 py-3 rounded-xl">
+        <p className="text-white/60 text-sm mb-1">Invited</p>
+        <p className="text-white text-lg font-bold">145 people</p>
+      </div>
+      <div className="bg-white/5 px-4 py-3 rounded-xl">
+        <p className="text-white/60 text-sm mb-1">Bonus</p>
+        <p className="text-white text-lg font-bold">1,465</p>
+      </div>
+    </div>
 
-        {/* Sales Overview */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
-          {/* Sales Chart */}
-          <div className="bg-gray-800/50 backdrop-blur-md rounded-xl p-6 border border-gray-700">
-            <h3 className="text-white text-lg font-semibold mb-4">Sales overview</h3>
-            <p className="text-gray-400 text-sm mb-4">Last 7 days</p>
-            <div className="h-32 flex items-end space-x-1">
-              {[30, 40, 35, 50, 45, 60, 55].map((height, index) => (
-                <div 
-                  key={index} 
-                  className="flex-1 bg-gradient-to-t from-blue-500 to-blue-400 rounded-t" 
-                  style={{ height: `${height}%` }}
-                ></div>
-              ))}
-            </div>
-          </div>
+    {/* Right: Circular Progress */}
+    <div className="w-60 h-60 relative">
+  <svg className="w-full h-full transform -rotate-90" viewBox="0 0 100 100">
+    <circle
+      cx="50"
+      cy="50"
+      r="40"
+      stroke="#1e293b"
+      strokeWidth="5"
+      fill="transparent"
+    />
+    <circle
+      cx="50"
+      cy="50"
+      r="40"
+      stroke="#10b981"
+      strokeWidth="4"
+      fill="transparent"
+      strokeDasharray={`${(2 * Math.PI * 40) * 0.93} ${(2 * Math.PI * 40) * (1 - 0.93)}`}
+      strokeLinecap="round"
+    />
+  </svg>
+  <div className="absolute inset-0 flex flex-col items-center justify-center">
+    <span className="text-white/60 text-sm">Safety</span>
+    <span className="text-white text-3xl font-bold">9.3</span>
+    <span className="text-white/60 text-sm">Total Score</span>
+  </div>
+</div>
 
-          {/* Satisfaction Rate */}
-          <div className="bg-gray-800/50 backdrop-blur-md rounded-xl p-6 border border-gray-700">
-            <h3 className="text-white text-lg font-semibold mb-4">Satisfaction Rate</h3>
-            <div className="flex items-center justify-center mb-4">
-              <div className="relative w-32 h-32">
-                <svg className="w-full h-full transform -rotate-90" viewBox="0 0 100 100">
-                  <circle
-                    cx="50"
-                    cy="50"
-                    r="40"
-                    stroke="currentColor"
-                    strokeWidth="8"
-                    fill="transparent"
-                    className="text-gray-700"
-                  />
-                  <circle
-                    cx="50"
-                    cy="50"
-                    r="40"
-                    stroke="currentColor"
-                    strokeWidth="8"
-                    fill="transparent"
-                    strokeDasharray={`${2.51 * 93} ${2.51 * (100 - 93)}`}
-                    className="text-green-400"
-                  />
-                </svg>
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <span className="text-white text-2xl font-bold">9.3</span>
-                </div>
-              </div>
-            </div>
-            <p className="text-center text-gray-400 text-sm">based on likes</p>
-          </div>
+  </div>
+</div>
 
-          {/* Additional metric placeholder */}
-          <div className="bg-gray-800/50 backdrop-blur-md rounded-xl p-6 border border-gray-700">
-            <h3 className="text-white text-lg font-semibold mb-4">Revenue</h3>
-            <div className="text-center">
-              <div className="text-3xl font-bold text-white mb-2">$42,000</div>
-              <div className="text-green-400 text-sm flex items-center justify-center gap-1">
-                <ArrowUpRight className="w-4 h-4" />
-                +12% this month
-              </div>
-            </div>
-          </div>
-        </div>
+</div>
+
+
+<div
+  className="p-6 rounded-2xl relative overflow-hidden"
+  style={{
+    backgroundImage: 'linear-gradient(to top, #051641, #05255c)'
+  }}>
+      {/* Grid lines */}
+      <div className="absolute inset-0 opacity-20">
+        {[...Array(6)].map((_, i) => (
+          <div key={i} className="absolute w-full border-t border-blue-300" style={{ top: `${20 + i * 13.33}%` }}></div>
+        ))}
+      </div>
+      
+      {/* Header */}
+<div className="relative z-10 mb-20">
+  <h2 className="text-white text-lg font-medium mb-2">Sales overview</h2>
+  <p className="text-sm">
+    <span className="text-green-400">(+5) more</span>
+    <span className="text-gray-400"> in 2021</span>
+  </p>
+</div>
+      
+      {/* Y-axis labels */}
+<div className="absolute left-2 top-20 bottom-15 flex flex-col justify-between text-white text-xs opacity-60">
+  <span>500</span>
+  <span>400</span>
+  <span>300</span>
+  <span>200</span>
+  <span>100</span>
+  <span>0</span>
+</div>
+      
+      {/* Chart container */}
+      <div className="relative h-48 ml-8 mr-4">
+        {/* SVG Chart */}
+        <svg className="absolute inset-0 w-full h-full" viewBox="0 0 1000 200" preserveAspectRatio="none">
+          {/* Gradient definitions */}
+          <defs>
+            <linearGradient id="areaGradient1" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stopColor="#3B82F6" stopOpacity="0.8"/>
+              <stop offset="100%" stopColor="#1E40AF" stopOpacity="0.2"/>
+            </linearGradient>
+            <linearGradient id="areaGradient2" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stopColor="#06B6D4" stopOpacity="0.6"/>
+              <stop offset="100%" stopColor="#0891B2" stopOpacity="0.1"/>
+            </linearGradient>
+          </defs>
+          
+          {/* First area (darker blue) */}
+          <path
+            d="M0,120 Q100,90 200,95 T400,85 Q500,80 600,90 T800,100 Q900,110 1000,115 L1000,200 L0,200 Z"
+            fill="url(#areaGradient1)"
+          />
+          
+          {/* Second area (lighter blue/cyan) */}
+          <path
+            d="M0,40 Q100,35 200,45 T400,50 Q500,45 600,55 T800,60 Q900,65 1000,70 L1000,115 Q900,110 800,100 T600,90 Q500,80 400,85 T200,95 Q100,90 0,120 Z"
+            fill="url(#areaGradient2)"
+          />
+          
+          {/* Top line (cyan) */}
+          <path
+            d="M0,40 Q100,35 200,45 T400,50 Q500,45 600,55 T800,60 Q900,65 1000,70"
+            stroke="#06B6D4"
+            strokeWidth="2"
+            fill="none"
+          />
+          
+          {/* Bottom line (blue) */}
+          <path
+            d="M0,120 Q100,90 200,95 T400,85 Q500,80 600,90 T800,100 Q900,110 1000,115"
+            stroke="#3B82F6"
+            strokeWidth="2"
+            fill="none"
+          />
+        </svg>
+      </div>
+      
+      {/* X-axis labels */}
+      <div className="flex justify-between text-white text-xs opacity-60 mt-4 ml-8 mr-4">
+        <span>Jan</span>
+        <span>Feb</span>
+        <span>Mar</span>
+        <span>Apr</span>
+        <span>May</span>
+        <span>Jun</span>
+        <span>Jul</span>
+        <span>Aug</span>
+        <span>Sep</span>
+        <span>Oct</span>
+        <span>Nov</span>
+        <span>Dec</span>
+      </div>
+    </div>
+
+
+
+        
 
         {/* Projects and Orders */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          {/* Projects */}
-          <div className="bg-gray-800/50 backdrop-blur-md rounded-xl p-6 border border-gray-700">
-            <div className="flex items-center justify-between mb-6">
-              <h3 className="text-white text-lg font-semibold">Projects</h3>
-              <div className="flex items-center space-x-2">
-                <span className="text-blue-400 text-sm">✓</span>
-                <span className="text-gray-400 text-sm">30 done this month</span>
+          <div className="grid grid-cols-1 xl:grid-cols-3 gap-6 mt-5">
+            {/* Projects Section */}
+            <div
+              className="xl:col-span-2 backdrop-blur-sm rounded-2xl p-6 border border-white/10"
+              style={{
+                background: "linear-gradient(135deg, #051641 0%, #05255c 100%)",
+              }}
+            >
+              <div className="flex items-center justify-between mb-6">
+                <div>
+                  <h2 className="text-white text-xl font-semibold mb-1">Projects</h2>
+                  <div className="flex items-center gap-2">
+                    <div className="w-2 h-2 bg-green-400 rounded-full"></div>
+                    <span className="text-gray-300 text-sm">30 done this month</span>
+                  </div>
+                </div>
+                <button className="text-gray-400 hover:text-white">
+                  <MoreHorizontal className="w-5 h-5" />
+                </button>
               </div>
-            </div>
-            <div className="space-y-4">
-              {projects.map((project, index) => (
-                <div key={index} className="flex items-center justify-between">
-                  <div className="flex-1">
-                    <h4 className="text-white font-medium">{project.name}</h4>
-                    <div className="flex items-center space-x-4 mt-1">
+
+              <div className="space-y-1">
+                {/* Header */}
+                <div className="grid grid-cols-12 gap-4 px-4 py-3 text-xs font-medium text-gray-400 uppercase tracking-wider">
+                  <div className="col-span-5">Companies</div>
+                  <div className="col-span-2">Members</div>
+                  <div className="col-span-2">Budget</div>
+                  <div className="col-span-3">Completion</div>
+                </div>
+
+                {/* Project Rows */}
+                {projects.map((project) => (
+                  <div
+                    key={project.id}
+                    className="grid grid-cols-12 gap-4 px-4 py-4 hover:bg-white/5 rounded-lg transition-colors"
+                  >
+                    <div className="col-span-5 flex items-center gap-3">
+                      <div
+                        className={`w-8 h-8 ${project.iconBg} rounded-lg flex items-center justify-center text-white text-sm`}
+                      >
+                        {project.icon}
+                      </div>
+                      <span className="text-white font-medium text-sm">{project.company}</span>
+                    </div>
+
+                    <div className="col-span-2 flex items-center">
                       <div className="flex -space-x-2">
-                        {[...Array(project.users)].map((_, i) => (
-                          <div key={i} className="w-6 h-6 bg-blue-500 rounded-full border-2 border-gray-800"></div>
+                        {project.members.map((member, index) => (
+                          <img
+                            key={index}
+                            src={member}
+                            alt="Member"
+                            className="w-6 h-6 rounded-full border-2 border-blue-800 object-cover"
+                          />
                         ))}
                       </div>
-                      <span className="text-gray-400 text-sm">{project.budget}</span>
-                      <span className="text-gray-400 text-sm">{project.completion}%</span>
+                    </div>
+
+                    <div className="col-span-2 flex items-center">
+                      <span className="text-white font-medium text-sm">{project.budget}</span>
+                    </div>
+
+                    <div className="col-span-3 flex items-center gap-3">
+                      <span className="text-white font-medium text-sm">{project.completion}%</span>
+                      <div className="flex-1 bg-black/20 rounded-full h-2">
+                        <div
+                          className="bg-blue-400 h-2 rounded-full transition-all duration-300"
+                          style={{ width: `${project.completion}%` }}
+                        ></div>
+                      </div>
                     </div>
                   </div>
-                  <MoreHorizontal className="text-gray-400 w-5 h-5" />
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Orders Overview */}
-          <div className="bg-gray-800/50 backdrop-blur-md rounded-xl p-6 border border-gray-700">
-            <div className="flex items-center justify-between mb-6">
-              <h3 className="text-white text-lg font-semibold">Orders overview</h3>
-              <div className="flex items-center space-x-2">
-                <ArrowUpRight className="text-green-400 w-4 h-4" />
-                <span className="text-green-400 text-sm">+30%</span>
-                <span className="text-gray-400 text-sm">this month</span>
+                ))}
               </div>
             </div>
-            <div className="space-y-4">
-              {orders.map((order, index) => (
-                <div key={index} className="flex items-center space-x-3">
-                  <div className={`w-2 h-2 rounded-full ${order.status === 'done' ? 'bg-green-400' : 'bg-red-400'}`}></div>
-                  <div className="flex-1">
-                    <h4 className="text-white font-medium">{order.title}</h4>
-                    <p className="text-gray-400 text-sm">{order.time}</p>
-                  </div>
+
+            {/* Orders Overview Section */}
+            <div
+              className="backdrop-blur-sm rounded-2xl p-6 border border-white/10"
+              style={{
+                background: "linear-gradient(135deg, #051641 0%, #05255c 100%)",
+              }}
+            >
+              <div className="mb-6">
+                <h2 className="text-white text-xl font-semibold mb-1">Orders overview</h2>
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 bg-green-400 rounded-full"></div>
+                  <span className="text-gray-300 text-sm">+30% this month</span>
                 </div>
-              ))}
+              </div>
+
+              <div className="space-y-4">
+                {orders.map((order) => (
+                  <div key={order.id} className="flex items-start gap-3">
+                    <div
+                      className={`w-8 h-8 ${order.iconBg} rounded-lg flex items-center justify-center text-white text-sm flex-shrink-0`}
+                    >
+                      {order.icon}
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <p className="text-white font-medium text-sm leading-tight">{order.title}</p>
+                      <p className="text-gray-400 text-xs mt-1">{order.time}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
-        </div>
+        
       </div>
     </main>
   );

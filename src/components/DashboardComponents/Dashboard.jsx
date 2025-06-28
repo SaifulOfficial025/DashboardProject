@@ -1,32 +1,78 @@
-import React from 'react';
-import Navbar from './navbar';
-import Sidebar from './sidebar';
+import React, { useContext } from 'react';
+import Navbar from './Navbar';
+import Sidebar from './Sidebar';
 import DashboardMain from './DashboardMain';
+import { MenuContext, MenuProvider } from '../../context/MenuContext';
+import Tables from './Tables';
+import Billing from './Billing';
+import RTL from './RTL';
+import Profile from './Profile';
 
-const Dashboard = () => {
+import SignIn from '../LoginPage';
+import SignUp from '../Signup';
+
+const DashboardContent = () => {
+  const { activeComponent } = useContext(MenuContext);
+
+  const renderComponent = () => {
+    switch (activeComponent) {
+      case 'Dashboard':
+        return <DashboardMain />;
+      case 'Tables':
+        return <Tables />;
+      case 'Billing':
+        return <Billing />;
+      case 'RTL':
+        return <RTL />;
+      case 'Profile':
+        return <Profile />;
+      case 'Sign In':
+        return <SignIn />;
+      case 'Sign Up':
+        return <SignUp />;
+      default:
+        return <DashboardMain />;
+    }
+  };
+
   return (
-    <div className="flex h-screen bg-gray-900 relative">
+    <div className="relative min-h-screen bg-gray-900">
       {/* Background Image */}
-      <div 
+      <div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
         style={{
           backgroundImage: "url('/src/assets/DashboardScreen.png')"
         }}
       ></div>
-      
+
       {/* Optional overlay for better readability */}
       <div className="absolute inset-0 bg-black/30"></div>
-      
-      {/* Main content */}
-      <div className="relative z-10 flex w-full">
+
+      {/* Main layout */}
+      <div className="relative z-10 flex h-screen">
+        {/* Sidebar */}
         <Sidebar />
-        
-        <div className="flex-1 flex flex-col">
+
+        {/* Main Content Area */}
+        <div className="flex-1 flex flex-col overflow-hidden">
+          {/* Navbar */}
           <Navbar />
-          <DashboardMain />
+
+          {/* Scrollable Content */}
+          <div className="flex-1 overflow-y-auto">
+            {renderComponent()}
+          </div>
         </div>
       </div>
     </div>
+  );
+};
+
+const Dashboard = () => {
+  return (
+    <MenuProvider>
+      <DashboardContent />
+    </MenuProvider>
   );
 };
 

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import {
   Home,
   BarChart3,
@@ -9,8 +9,10 @@ import {
   UserPlus,
   HelpCircle
 } from 'lucide-react';
+import { MenuContext } from '../../context/MenuContext';
 
 const Sidebar = () => {
+  const { setActiveComponent } = useContext(MenuContext);
   const [activeItem, setActiveItem] = useState('Dashboard');
 
   const menuItems = [
@@ -28,10 +30,11 @@ const Sidebar = () => {
 
   const handleItemClick = (label) => {
     setActiveItem(label);
+    setActiveComponent(label);
   };
 
   return (
-    <div className="w-64 sticky top-4 bottom-4 h-[calc(100vh-2rem)] relative">
+    <div className="w-64 p-4 sticky top-0 h-screen">
       {/* Main container with Vision UI styling */}
       <div className="flex flex-col h-full bg-gradient-to-br from-slate-800 via-slate-900 to-blue-900 rounded-2xl relative overflow-hidden">
         

@@ -1,18 +1,20 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { MenuContext } from '../../context/MenuContext';
 import { Bell, Search, User, Settings } from 'lucide-react';
 
 export default function Navbar() {
+  const { activeComponent } = useContext(MenuContext);
   return (
-    <nav className="px-6 py-4">
+    <nav className="px-6 py-4 sticky top-0 bg-gray-900/50 backdrop-blur-sm z-20">
       <div className="flex items-center justify-between">
         {/* Left side - Breadcrumb */}
-        <div className="flex items-center space-x-1">
-          <div>
-            <span className="text-white/70 text-sm">Pages</span>
-            <span className="text-white/70 text-sm">/</span>
-            <span className="text-white text-sm font-medium">Dashboard</span>
-          </div>
-        </div>
+<div className="flex items-center space-x-1">
+  <div>
+    <span className="text-white/70 text-sm">Pages</span>
+    <span className="text-white/70 text-sm">/</span>
+    <span className="text-white text-sm font-medium">{activeComponent}</span>
+  </div>
+</div>
         {/* Right side - Search, Icons and Profile */}
         <div className="flex items-center space-x-4">
           {/* Search Bar */}
@@ -36,7 +38,7 @@ export default function Navbar() {
         </div>
       </div>
       <div className="">
-        <h1 className="text-white text-lg font-semibold text-left">Dashboard</h1>
+        <h1 className="text-white text-lg font-semibold text-left">{activeComponent}</h1>
       </div>
     </nav>
   );
