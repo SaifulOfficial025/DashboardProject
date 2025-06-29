@@ -31,10 +31,10 @@ export default function Signup() {
   };
 
   return (
-    <div className="flex min-h-screen bg-[#070B24]"> {/* Main container with dark background */}
+    <div className="flex min-h-screen bg-[#070B24] flex-col md:flex-row"> {/* Main container with dark background */}
       {/* Left Division - Background Image with Overlay Text */}
       <div 
-        className="hidden lg:flex w-1/2 items-end p-10 relative overflow-hidden" 
+        className="flex w-full h-1/2 md:h-auto md:w-1/2 items-end p-4 md:p-10 relative overflow-hidden" 
         style={{ 
           backgroundImage: `url(${backgroundImage})`, 
           backgroundSize: 'cover', 
@@ -57,8 +57,8 @@ export default function Signup() {
       
 
       {/* Right Division - Login Form */}
-      <div className="flex flex-1 items-center justify-center p-6 sm:p-10 lg:w-1/2 ">
-        <div className="w-full max-w-md ">
+      <div className="flex flex-1 items-center justify-center p-4 md:p-6 lg:p-10 md:w-1/2">
+        <div className="w-full max-w-md px-2 md:px-0">
           <h2 className="text-white text-3xl font-bold mb-3 text-center">Welcome!</h2>
           <p className="text-white text-lg mb-8 text-center">Use this awesome forms to login or create new account in your project for free.</p>
         

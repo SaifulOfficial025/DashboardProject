@@ -39,19 +39,21 @@ const DashboardContent = () => {
     <div className="relative min-h-screen bg-gray-900">
       {/* Background Image */}
       <div
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat hidden md:block"
         style={{
           backgroundImage: "url('/src/assets/DashboardScreen.png')"
         }}
       ></div>
 
       {/* Optional overlay for better readability */}
-      <div className="absolute inset-0 bg-black/30"></div>
+      <div className="absolute inset-0 bg-black/30 hidden md:block"></div>
 
       {/* Main layout */}
-      <div className="relative z-10 flex h-screen">
+      <div className="relative z-10 flex flex-col md:flex-row h-screen">
         {/* Sidebar */}
-        <Sidebar />
+        <div className="block overflow-y-auto max-h-1/3 md:max-h-full">
+          <Sidebar />
+        </div>
 
         {/* Main Content Area */}
         <div className="flex-1 flex flex-col overflow-hidden">

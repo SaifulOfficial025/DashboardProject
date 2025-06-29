@@ -14,6 +14,7 @@ import { MenuContext } from '../../context/MenuContext';
 const Sidebar = () => {
   const { setActiveComponent } = useContext(MenuContext);
   const [activeItem, setActiveItem] = useState('Dashboard');
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
 
   const menuItems = [
     { icon: Home, label: 'Dashboard', active: true },
@@ -34,14 +35,22 @@ const Sidebar = () => {
   };
 
   return (
-    <div className="w-64 p-4 sticky top-0 h-screen">
+    <div className={`p-4 sticky top-0 h-screen transition-all duration-300 ${isSidebarOpen ? 'w-64' : 'w-0 md:w-64'} overflow-hidden md:overflow-visible`}>
       {/* Main container with Vision UI styling */}
       <div className="flex flex-col h-full bg-gradient-to-br from-slate-800 via-slate-900 to-blue-900 rounded-2xl relative overflow-hidden">
-        
         {/* Transparent gradient shade on right side */}
         <div className="absolute top-0 right-0 w-16 h-full bg-gradient-to-l from-white/8 via-blue-400/10 to-transparent pointer-events-none"></div>
         
         <div className="relative z-10 p-6 h-full flex flex-col">
+          {/* Toggle Button for Mobile */}
+          <div className="md:hidden mb-4">
+            <button 
+              onClick={() => setIsSidebarOpen(!isSidebarOpen)} 
+              className="text-white bg-blue-500/30 hover:bg-blue-500/50 p-2 rounded-lg"
+            >
+              {isSidebarOpen ? 'Close' : 'Menu'}
+            </button>
+          </div>
           {/* Logo */}
           <div className="text-center mb-6">
             <h1 className="text-white text-sm font-semibold tracking-widest opacity-90">

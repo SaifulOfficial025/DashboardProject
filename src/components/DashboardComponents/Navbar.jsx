@@ -5,8 +5,8 @@ import { Bell, Search, User, Settings } from 'lucide-react';
 export default function Navbar() {
   const { activeComponent } = useContext(MenuContext);
   return (
-    <nav className="px-6 py-4 sticky top-0 bg-gray-900/50 backdrop-blur-sm z-20">
-      <div className="flex items-center justify-between">
+    <nav className="px-4 py-3 md:px-6 md:py-4 sticky top-0 bg-gray-900/50 backdrop-blur-sm z-20">
+      <div className="flex flex-col md:flex-row items-center justify-between">
         {/* Left side - Breadcrumb */}
 <div className="flex items-center space-x-1">
   <div>
@@ -16,13 +16,13 @@ export default function Navbar() {
   </div>
 </div>
         {/* Right side - Search, Icons and Profile */}
-        <div className="flex items-center space-x-4">
+        <div className="flex items-center space-x-2 md:space-x-4 mt-2 md:mt-0">
           {/* Search Bar */}
           <div className="relative">
             <input
               type="text"
               placeholder="Type here..."
-              className="bg-transparent text-white placeholder-white/50 px-4 py-2 rounded-lg border border-white/20 focus:outline-none focus:border-blue-400 transition-all duration-300 w-48 text-sm"
+              className="bg-transparent text-white placeholder-white/50 px-3 py-1 md:px-4 md:py-2 rounded-lg border border-white/20 focus:outline-none focus:border-blue-400 transition-all duration-300 w-40 md:w-48 text-xs md:text-sm"
             />
           </div>
           {/* Profile Section */}
