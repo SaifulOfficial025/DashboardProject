@@ -32,7 +32,7 @@ function AppContent() {
         <PrivateRoute path="/datashow" component={Datashow} />
         <PrivateRoute path="/datashow2" component={Datashow2} />
         <PrivateRoute path="/image" component={ImagePage} />
-        <Route path="/dashboard" component={Dashboard} />
+        <PrivateRoute path="/dashboard" component={Dashboard} />
       </Switch>
     </div>
   );
