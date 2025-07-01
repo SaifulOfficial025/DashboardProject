@@ -3,6 +3,7 @@ import Navbar from './Navbar';
 import Sidebar from './Sidebar';
 import DashboardMain from './DashboardMain';
 import { MenuContext, MenuProvider } from '../../context/MenuContext';
+import { DataProvider } from '../../context/DataContext';
 import Tables from './Tables';
 import Billing from './Billing';
 import RTL from './RTL';
@@ -73,7 +74,9 @@ const DashboardContent = () => {
 const Dashboard = () => {
   return (
     <MenuProvider>
-      <DashboardContent />
+      <DataProvider>
+        <DashboardContent />
+      </DataProvider>
     </MenuProvider>
   );
 };

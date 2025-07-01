@@ -2,8 +2,76 @@ import React from 'react';
 import { Pen, FileText, MoreHorizontal } from 'lucide-react';
 import { Trash2, Edit, Calendar, ArrowDown, ArrowUp, AlertCircle } from 'lucide-react';
 import { AiFillFilePdf } from 'react-icons/ai'; 
+import { useEffect, useContext } from "react";
+import { DataContext } from "../../context/DataContext";
+
+// Define TransactionItem component WITHIN Billing.jsx but OUTSIDE the main Billing function.
+// This allows it to access variables and functions defined in Billing's outer scope
+// (like typeStyles and icon) if passed as props.
+const TransactionItem = ({ type, title, amount, date, typeStyles, icon }) => {
+  return (
+    <div className="flex justify-between items-center bg-slate-800/50 rounded-xl p-4 backdrop-blur-sm">
+      <div className="flex items-center gap-3">
+        {/* Safely access icon and typeStyles using the 'type' prop */}
+        <div className={`w-8 h-8 rounded-full flex items-center justify-center ${typeStyles[type]}`}>
+          {icon[type]}
+        </div>
+        <div>
+          <p className="text-white font-medium">{title}</p>
+          <p className="text-gray-400 text-xs">{date}</p>
+        </div>
+      </div>
+      {/* Apply amount styling based on type */}
+      <p className={`font-semibold ${type === "out" ? "text-red-400" : "text-emerald-400"}`}>{amount}</p>
+    </div>
+  );
+};
+
 
 const Billing = () => {
+  const { invoiceData, fetchInvoices, transactions, fetchTransactions } = useContext(DataContext);
+
+  const typeStyles = {
+    in: "bg-emerald-500 text-emerald-400",
+    out: "bg-red-500 text-red-400",
+    pending: "bg-gray-500 text-blue-400",
+  };
+
+  const icon = {
+    in: <ArrowUp size={14} className="text-white" />,
+    out: <ArrowDown size={14} className="text-white" />,
+    pending: <AlertCircle size={14} className="text-white" />,
+  };
+
+  // Renamed formatDate to formatDateTime to match your usage in TransactionItem
+  const formatDateTime = (isoString) => {
+    const date = new Date(isoString);
+    return date.toLocaleString("en-US", {
+      day: "2-digit",
+      month: "long",
+      year: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+  };
+
+  // Kept formatDate for invoice section if needed, or remove if formatDateTime replaces it entirely
+  const formatDate = (isoString) => {
+    const date = new Date(isoString);
+    return date.toLocaleString("en-US", {
+      day: "2-digit",
+      month: "long",
+      year: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+  };
+
+  useEffect(() => {
+    fetchInvoices();
+    fetchTransactions();
+  }, []);
+
   return (
     <div className="w-full min-h-screen text-white p-6">
       {/* Top Section */}
@@ -78,25 +146,21 @@ const Billing = () => {
         {/* Right Side (40%) */}
         <div className="w-full md:w-[40%] p-6 rounded-2xl shadow-lg flex flex-col" style={{ background: "linear-gradient(135deg, #051641 0%, #05255c 100%)" }}>
           <div className="flex justify-between items-center mb-4">
-            <h4 className="font-semibold text-lg">Invoices</h4>
-            <button className="text-sm px-4 py-1 bg-blue-500 hover:bg-blue-600 rounded-full">VIEW ALL</button>
+            <h4 className="font-semibold text-lg text-white">Invoices</h4>
+            <button className="text-sm px-4 py-1 bg-blue-500 hover:bg-blue-600 rounded-full text-white">VIEW ALL</button>
           </div>
           <div className="flex flex-col gap-4">
-            {[
-              { date: "March, 01, 2020", id: "#MS-415646", amount: "$180" },
-              { date: "February, 10, 2021", id: "#RV-126749", amount: "$250" },
-              { date: "April, 05, 2020", id: "#FB-212562", amount: "$560" },
-              { date: "June, 25, 2019", id: "#QW-103578", amount: "$120" },
-              { date: "March, 01, 2019", id: "#AR-803481", amount: "$300" }
-            ].map((invoice, i) => (
-              <div key={i} className="flex justify-between items-center border-b border-white/10 pb-2">
+            {invoiceData.slice(0, 5).map((invoice) => (
+              <div key={invoice.id} className="flex justify-between items-center border-b border-white/10 pb-2">
                 <div>
-                  <p className="text-sm font-medium">{invoice.date}</p>
-                  <p className="text-xs text-gray-400">{invoice.id}</p>
+                  <p className="text-sm font-medium text-white">{formatDate(invoice.created_at)}</p>
+                  <p className="text-xs text-gray-400">#{invoice.invoice_id.slice(0, 8).toUpperCase()}</p>
                 </div>
                 <div className="flex items-center gap-4">
-                  <p className="font-semibold">{invoice.amount}</p>
-                  <span className='flex items-center'>PDF <AiFillFilePdf size={18} className="text-white-500 cursor-pointer" /></span>
+                  <p className="font-semibold text-white">${parseFloat(invoice.total).toFixed(2)}</p>
+                  <span className="flex items-center text-white cursor-pointer">
+                    PDF <AiFillFilePdf size={18} className="ml-1" />
+                  </span>
                 </div>
               </div>
             ))}
@@ -137,98 +201,35 @@ const Billing = () => {
           </div>
         </div>
 
-        {/* Transactions (40%) */}
+        {/* Bottom Section Transactions */}
         <div className="w-full md:w-[40%]">
-          <div className="rounded-2xl p-6 h-full" style={{ background: "linear-gradient(330deg, #052e75 50%, #05255c 100%)" }}>
+          <div
+            className="rounded-2xl p-6 h-full"
+            style={{ background: "linear-gradient(330deg, #052e75 50%, #05255c 100%)" }}
+          >
             <div className="flex justify-between items-center mb-6">
               <h2 className="text-white text-xl font-semibold">Your Transactions</h2>
               <div className="flex items-center text-gray-400 text-sm">
                 <Calendar size={16} className="mr-2" />
-                23 - 30 March 2020
+                Latest Activity
               </div>
             </div>
-            {/* Transactions */}
-            <div className="mb-6">
-              <p className="text-gray-400 text-xs font-medium uppercase tracking-wider mb-4">NEWEST</p>
-              <div className="space-y-3">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center">
-                    <div className="w-8 h-8 bg-red-500 rounded-full flex items-center justify-center mr-3">
-                      <ArrowDown size={14} className="text-white" />
-                    </div>
-                    <div>
-                      <p className="text-white font-medium">Netflix</p>
-                      <p className="text-gray-400 text-sm">27 March 2020, at 12:30 PM</p>
-                    </div>
-                  </div>
-                  <span className="text-red-400 font-medium">-$2500</span>
-                </div>
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center">
-                    <div className="w-8 h-8 bg-emerald-500 rounded-full flex items-center justify-center mr-3">
-                      <ArrowUp size={14} className="text-white" />
-                    </div>
-                    <div>
-                      <p className="text-white font-medium">Apple</p>
-                      <p className="text-gray-400 text-sm">27 March 2020, at 12:30 PM</p>
-                    </div>
-                  </div>
-                  <span className="text-emerald-400 font-medium">+$2500</span>
-                </div>
-              </div>
-            </div>
-            <div>
-              <p className="text-gray-400 text-xs font-medium uppercase tracking-wider mb-4">YESTERDAY</p>
-              <div className="space-y-3">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center">
-                    <div className="w-8 h-8 bg-emerald-500 rounded-full flex items-center justify-center mr-3">
-                      <ArrowUp size={14} className="text-white" />
-                    </div>
-                    <div>
-                      <p className="text-white font-medium">Stripe</p>
-                      <p className="text-gray-400 text-sm">26 March 2020, at 13:45 PM</p>
-                    </div>
-                  </div>
-                  <span className="text-emerald-400 font-medium">+$800</span>
-                </div>
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center">
-                    <div className="w-8 h-8 bg-emerald-500 rounded-full flex items-center justify-center mr-3">
-                      <ArrowUp size={14} className="text-white" />
-                    </div>
-                    <div>
-                      <p className="text-white font-medium">HubSpot</p>
-                      <p className="text-gray-400 text-sm">26 March 2020, at 12:30 PM</p>
-                    </div>
-                  </div>
-                  <span className="text-emerald-400 font-medium">+$1700</span>
-                </div>
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center">
-                    <div className="w-8 h-8 bg-gray-500 rounded-full flex items-center justify-center mr-3">
-                      <AlertCircle size={14} className="text-white" />
-                    </div>
-                    <div>
-                      <p className="text-white font-medium">Webflow</p>
-                      <p className="text-gray-400 text-sm">26 March 2020, at 05:00 AM</p>
-                    </div>
-                  </div>
-                  <span className="text-blue-400 font-medium">Pending</span>
-                </div>
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center">
-                    <div className="w-8 h-8 bg-red-500 rounded-full flex items-center justify-center mr-3">
-                      <ArrowDown size={14} className="text-white" />
-                    </div>
-                    <div>
-                      <p className="text-white font-medium">Microsoft</p>
-                      <p className="text-gray-400 text-sm">25 March 2020, at 16:30 PM</p>
-                    </div>
-                  </div>
-                  <span className="text-red-400 font-medium">-$987</span>
-                </div>
-              </div>
+            <div className="space-y-3">
+              {transactions?.slice(0, 6).map((txn) => (
+                <TransactionItem
+                  key={txn.transaction_id}
+                  // It's good practice to ensure 'type' exists or has a default
+                  type={txn.type || 'in'} 
+                  title={txn.project_title || "Transaction"}
+                  // Format amount with '+' or '-' based on type
+                  amount={`${txn.type === "out" ? '-' : '+'}$${parseFloat(txn.amount).toFixed(2)}`}
+                  // Use the renamed formatDateTime function
+                  date={formatDateTime(txn.created_at)}
+                  // Pass the style and icon objects down as props
+                  typeStyles={typeStyles} 
+                  icon={icon} 
+                />
+              ))}
             </div>
           </div>
         </div>

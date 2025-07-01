@@ -5,28 +5,35 @@ import { Link, useLocation } from "react-router-dom";
 import backgroundImage from '../assets/LoginPage.svg';
 
 export default function Signup() {
-  const { login } = useContext(AuthContext);
+  const { register } = useContext(AuthContext);
   const history = useHistory();
 
-  const location = useLocation(); 
-  const from = location.state?.from?.pathname || '/dashboard'; 
-
-  
-
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  // const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState('');
 
-  const handleLogin = async (e) => {
+  const handleRegister = async (e) => {
     e.preventDefault();
     setError('');
+    console.log("Signup button clicked, handling registration...");
 
-    const result = await login(email, password);
+    console.log("Checking if passwords match...");
+    // if (password !== confirmPassword) {
+    //   setError("Passwords do not match.");
+    //   console.log("Passwords do not match, stopping registration.");
+    //   return;
+    // }
+    console.log("Name:", name, "Email:", email, "Password:", password);
+
+    const result = await register(name, email, password);
+    console.log("Registration result:", result);
+    // you may need to adjust your backend if name is required
     if (result.success) {
-        history.push(from);
-        // or any protected route
+      history.push('/dashboard');
     } else {
-      setError(result.message);
+      setError(result.message || "Registration failed.");
     }
   };
 
@@ -66,15 +73,19 @@ export default function Signup() {
         
         <div className='p-0.5 rounded-[2rem] bg-gradient-to-tr from-gray-500 via-white to-gray-500 shadow-sm shadow-gray-50'>
 
-          <form className='w-full px-6 py-6 rounded-[2rem] bg-[#070b24] text-white placeholder-gray-400 focus:outline-none'>
+          <form className='w-full px-6 py-6 rounded-[2rem] bg-[#070b24] text-white placeholder-gray-400 focus:outline-none' onSubmit={handleRegister}>
+
 
 
             {/* Name Input */}
             <div className="mb-6">
-              <label htmlFor="email" className="block text-gray-300 text-sm font-semibold mb-2">Name</label>
+              <label htmlFor="name" className="block text-gray-300 text-sm font-semibold mb-2">Name</label>
               <div className="p-[2px] rounded-[2rem] bg-gradient-to-tr from-gray-500 via-white to-gray-500">
                 <input
+                value={name}
                   type="text"
+                  
+                  onChange={(e) => setName(e.target.value)}
                   placeholder="Your Full Name"
                   className="w-full px-6 py-3 rounded-[2rem] bg-[#070b24] text-white placeholder-gray-400 focus:outline-none"
                 />
@@ -86,8 +97,10 @@ export default function Signup() {
             <div className="mb-6">
               <label htmlFor="email" className="block text-gray-300 text-sm font-semibold mb-2">Email</label>
               <div className="p-[2px] rounded-[2rem] bg-gradient-to-tr from-gray-500 via-white to-gray-500">
-                <input
+                <input                
                   type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   placeholder="Your email address"
                   className="w-full px-6 py-3 rounded-[2rem] bg-[#070b24] text-white placeholder-gray-400 focus:outline-none"
                 />
@@ -97,10 +110,11 @@ export default function Signup() {
             {/* Password Input */}
             <div className="mb-6">
               <label htmlFor="password" className="block text-gray-300 text-sm font-semibold mb-2">Password</label>
-              
               <div className="p-[2px] rounded-[2rem] bg-gradient-to-tr from-gray-500 via-white to-gray-500">
                 <input
-                  type="email"
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                   placeholder="Your Password"
                   className="w-full px-6 py-3 rounded-[2rem] bg-[#070b24] text-white placeholder-gray-400 focus:outline-none"
                 />
@@ -108,7 +122,7 @@ export default function Signup() {
             </div>
 
             {/* Remember Me Checkbox */}
-            <div className="flex items-center mb-8">
+            {/* <div className="flex items-center mb-8">
                   <label className="inline-flex items-center cursor-pointer">
                           <input
                             type="checkbox"
@@ -118,7 +132,7 @@ export default function Signup() {
                           <div className="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600 dark:peer-checked:bg-blue-600" />
                           <label htmlFor="rememberMe" className="ml-2 text-gray-300 text-sm">Remember me</label>
                         </label>
-            </div>
+            </div> */}
 
             {/* Sign In Button */}
             <button

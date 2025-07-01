@@ -7,37 +7,45 @@ export const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(() => {
     const stored = localStorage.getItem('user');
-    return stored ? JSON.parse(stored) : null;
+    if (stored) {
+      return JSON.parse(stored);
+    }
+    return null;
   });
 
-  const login = async (email, password) => {
+  const login = async (email, password, rememberMe = false) => {
     try {
-      const res = await fetch('http://192.168.10.210:8000/api/login/', {
+      const res = await fetch('https://novel-fresh-spaniel.ngrok-free.app/api/accounts/token', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          username: email, // backend expects 'username'
-          password,
+          email: email, 
+          password: password
         }),
       });
 
       if (!res.ok) {
+        console.log(email, password);
         const err = await res.json();
         throw new Error(err.detail || 'Login failed');
       }
 
       const data = await res.json();
-
+      const storage = rememberMe ? localStorage : sessionStorage;
+      
       // Store tokens
-      localStorage.setItem('accessToken', data.access);
-      localStorage.setItem('refreshToken', data.refresh);
+      storage.setItem('accessToken', data.access);
+      storage.setItem('refreshToken', data.refresh);
+      storage.setItem('rememberMe', JSON.stringify(rememberMe));
 
-      // Set user
-      const loggedInUser = { username: email }; // Or decode token to get username
+      // Set user - attempt to fetch full_name from stored data or use email as fallback
+      const storedUser = storage.getItem('user');
+      const fullName = storedUser ? JSON.parse(storedUser).full_name : '';
+      const loggedInUser = { username: email, full_name: fullName || '' };
       setUser(loggedInUser);
-      localStorage.setItem('user', JSON.stringify(loggedInUser));
+      storage.setItem('user', JSON.stringify(loggedInUser));
 
       return { success: true };
     } catch (err) {
@@ -47,22 +55,25 @@ export const AuthProvider = ({ children }) => {
 
   const logout = () => {
     setUser(null);
-    localStorage.removeItem('accessToken');
-    localStorage.removeItem('refreshToken');
-    localStorage.removeItem('user');
+    const rememberMe = JSON.parse(localStorage.getItem('rememberMe') || sessionStorage.getItem('rememberMe') || 'false');
+    const storage = rememberMe ? localStorage : sessionStorage;
+    storage.removeItem('accessToken');
+    storage.removeItem('refreshToken');
+    storage.removeItem('user');
+    storage.removeItem('rememberMe');
   };
 
 
 
-  const register = async (email, password, username) => {
+  const register = async (name, email, password) => {
     try {
-      const res = await fetch('http://192.168.10.210:8000/user/', {
+      const res = await fetch('https://novel-fresh-spaniel.ngrok-free.app/api/accounts/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          username: username,  // 🔁 properly labeled
+          full_name: name,  // 🔁 properly labeled
           email: email,
           password: password,
         }),
@@ -71,11 +82,17 @@ export const AuthProvider = ({ children }) => {
       if (!res.ok) {
         const err = await res.json();
         console.log("🚨 Register error response:", err);
-        throw new Error(err.detail || 'Registration failed');
+        throw new Error(err.detail || Object.values(err).join(', ') || 'Registration failed');
       }
   
       // auto-login after register
-      return await login(username, password);
+      console.log("✅ Registration successful, auto-logging in...");
+
+      // Store full_name during registration
+      const registeredUser = { username: email, full_name: name };
+      localStorage.setItem('user', JSON.stringify(registeredUser));
+      setUser(registeredUser);
+      return await login(email, password, true);
   
     } catch (err) {
       return { success: false, message: err.message };
